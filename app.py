@@ -8,6 +8,15 @@ dept_model = joblib.load(MODEL_PATH)
 
 app = FastAPI(title="Booking Feedback Department Classifier API", version="1.0.0")
 
+# ✅ Root endpoint to avoid 404 on Render
+@app.get("/")
+def root():
+    return {
+        "message": "Booking Feedback Department Classifier API is running",
+        "health": "/health",
+        "classify": "POST /classify"
+    }
+
 class FeedbackInput(BaseModel):
     feedback: str
 
